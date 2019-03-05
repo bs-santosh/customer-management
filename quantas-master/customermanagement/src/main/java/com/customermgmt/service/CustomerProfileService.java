@@ -71,23 +71,25 @@ public class CustomerProfileService {
     public CustomerProfile saveCustomerProfile(CustomerProfileDto customerProfileDto) {
         System.out.println("customerProfileDto = " + customerProfileDto);
         List<Address> addresses = new ArrayList<Address>();
-        customerProfileDto.getAddresses().stream().forEach(addressDto -> {
-            addresses.add(addressRepository.save(
-               Address.builder()
-                       .id(addressDto.getId())
-                       .addressType(addressDto.getAddressType())
-                       .contactNo(addressDto.getContactNo())
-                       .email(addressDto.
-                               getEmail())
-                       .streetNo(addressDto.getStreetNo())
-                       .street(addressDto.getStreet())
-                       .state(addressDto.getState())
-                       .suburb(addressDto.getSuburb())
-                       .pincode(addressDto.getPincode())
-                       .build()
-            ));
+        if(customerProfileDto.getAddresses() != null) {
+            customerProfileDto.getAddresses().stream().forEach(addressDto -> {
+                addresses.add(addressRepository.save(
+                        Address.builder()
+                                .id(addressDto.getId())
+                                .addressType(addressDto.getAddressType())
+                                .contactNo(addressDto.getContactNo())
+                                .email(addressDto.
+                                        getEmail())
+                                .streetNo(addressDto.getStreetNo())
+                                .street(addressDto.getStreet())
+                                .state(addressDto.getState())
+                                .suburb(addressDto.getSuburb())
+                                .pincode(addressDto.getPincode())
+                                .build()
+                ));
 
-        });
+            });
+        }
         return customerProfileRepository.save(CustomerProfile.builder()
                 .id(customerProfileDto.getId())
                 .addresses(addresses)
