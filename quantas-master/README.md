@@ -10,3 +10,6 @@ Rest Endpoints:
 2. Find All - /quantas/customers/find/all
 3. Find by ID - /quantas/customers/find/{customerId}
 4. Delete - /quantas/customers/delete
+
+Swagger URL - http://localhost:8090/quantas/v2/api-docs
+
