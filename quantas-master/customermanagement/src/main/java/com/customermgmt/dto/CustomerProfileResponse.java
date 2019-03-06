@@ -10,5 +10,6 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 public class CustomerProfileResponse {
+    private String message;
     private List<CustomerProfileDto> customerProfileDtos;
 }

@@ -150,6 +150,15 @@ Sample JSON response:
         }
     ]
 }
+
+When the requested customer isn't found:
+{
+    "message": "Unable to find the customer profile with ID: 10",
+    "customerProfileDtos": [
+        null
+    ]
+}
+
 4. Delete - /quantas/customers/delete
 
 Sample JSON post request to delete the customer:

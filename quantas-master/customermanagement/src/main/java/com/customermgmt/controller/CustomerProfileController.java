@@ -1,12 +1,16 @@
 package com.customermgmt.controller;
 
+import com.customermgmt.constants.Messages;
 import com.customermgmt.dto.CustomerProfileDto;
 import com.customermgmt.dto.CustomerProfileResponse;
 import com.customermgmt.service.CustomerProfileService;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,12 +45,16 @@ public class CustomerProfileController {
             responseContainer = "List")
     @GetMapping(value="/customers/find/{customerId}")
     public CustomerProfileResponse findSingleCustomer(@PathVariable(name = "customerId") Long customerId) {
-        System.out.println("customerId = " + customerId);
+        String errorMessage = "";
         CustomerProfileDto customerProfileDto = customerProfileService.findCustomerProfileById(customerId);
+        if(customerProfileDto == null) {
+            errorMessage = String.format(Messages.ERROR_CUSTOMER_PROFILE_NOT_FOUND, customerId);
+        }
         List<CustomerProfileDto> customerProfileDtos = new ArrayList<>();
         customerProfileDtos.add(customerProfileDto);
         return CustomerProfileResponse.builder()
                 .customerProfileDtos(customerProfileDtos)
+                .message(errorMessage)
                 .build();
     }
 

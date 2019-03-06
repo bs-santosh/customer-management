@@ -61,20 +61,18 @@ public class CustomerProfileRunner implements CommandLineRunner {
         List<Address> addressList2 = new ArrayList<>();
         addressList2.add(address3);
 
-        CustomerProfile customer1 = customerProfileRepository.save(CustomerProfile.builder()
+        customerProfileRepository.save(CustomerProfile.builder()
                 .firstName("John")
                 .lastName("Welsch")
                 .dateOfBirth(new SimpleDateFormat("dd-mm-yyyy").parse("10-10-1980"))
                 .addresses(addressList1)
                 .build());
-        System.out.println("customer1.getId() = " + customer1.getId());
 
-        CustomerProfile customer2 = customerProfileRepository.save(CustomerProfile.builder()
+        customerProfileRepository.save(CustomerProfile.builder()
                 .firstName("William")
                 .lastName("La")
                 .dateOfBirth(new SimpleDateFormat("dd-mm-yyyy").parse("10-10-1972"))
                 .addresses(addressList2)
                 .build());
-        System.out.println("customer2.getId() = " + customer2.getId());
     }
 }
